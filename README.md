@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Local PDF RAG
 
 A self-hosted local knowledge base for PDF collections using **RAG (Retrieval-Augmented Generation)**, Qdrant vector search, SentenceTransformers, OCR and an OpenAI-compatible API.
@@ -348,3 +349,7 @@ MIT License. See [LICENSE](LICENSE).
 ## Disclaimer
 
 This project is provided for local knowledge retrieval and educational/administrative use. Content retrieved from PDFs can be outdated, incomplete or incorrect. Validate commands and security guidance before using them in production environments.
+=======
+# local-pdf-rag
+Local PDF RAG 
+>>>>>>> 3db95efc1b5f8092cc59c45be61598e1094f8c43
