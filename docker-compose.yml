@@ -1,0 +1,39 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.0
+    container_name: pdf-rag-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant:/qdrant/storage
+
+  pdf-rag:
+    build: ./app
+    image: local-pdf-rag:1.1.0
+    container_name: pdf-rag-app
+    restart: unless-stopped
+    depends_on:
+      - qdrant
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      DATA_DIR: /data
+      LOG_DIR: /logs
+      QDRANT_URL: http://qdrant:6333
+      LMSTUDIO_URL: ${LMSTUDIO_URL:-http://host.docker.internal:1234/v1}
+      LMSTUDIO_MODEL: ${LMSTUDIO_MODEL:-local-model}
+      EMBED_MODEL: ${EMBED_MODEL:-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2}
+      AUTO_CLASSIFY: ${AUTO_CLASSIFY:-true}
+      TOP_K: ${TOP_K:-6}
+      CHUNK_CHARS: ${CHUNK_CHARS:-4500}
+      CHUNK_OVERLAP: ${CHUNK_OVERLAP:-600}
+      OCR_ENABLED: ${OCR_ENABLED:-true}
+      OCR_LANG: ${OCR_LANG:-deu+eng}
+      OCR_DPI: ${OCR_DPI:-200}
+      OCR_MIN_TEXT_CHARS: ${OCR_MIN_TEXT_CHARS:-40}
+    ports:
+      - "8787:8000"
+    volumes:
+      - ./data:/data
+      - ./logs:/logs

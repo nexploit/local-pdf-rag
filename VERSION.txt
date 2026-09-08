@@ -1,0 +1,2 @@
+Local PDF RAG 1.1.0
+OCR + Web UI + OpenAI-compatible RAG API

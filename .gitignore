@@ -1,0 +1,23 @@
+# Runtime data
+data/
+qdrant/
+logs/
+
+# Local configuration
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build / temporary
+*.log
+*.tmp
